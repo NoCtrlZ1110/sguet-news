@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+
+.subtitle {
+    font-family: 'Tangerine';
+    color: #fff;
+    font-size: 48px;
+    margin-top: 5px;
+}

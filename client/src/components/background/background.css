@@ -1,0 +1,10 @@
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 1920px;
+    height: 1080px;
+    background-size: cover;
+    background-position: center;
+}
