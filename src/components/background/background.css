@@ -3,8 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 1920px;
-    height: 1080px;
+    width: 1500px;
+    height: 1000px;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
 }
