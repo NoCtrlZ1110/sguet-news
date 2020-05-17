@@ -1,6 +1,6 @@
 import React from "react";
 import "./background.css";
-import SIZE from "../../const";
+// import SIZE from "../../const";
 
 export default function Background(props) {
   let bgStyle = {
@@ -9,8 +9,8 @@ export default function Background(props) {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    width: SIZE.WIDTH,
-    height: SIZE.HEIGHT,
+    width: props.size.WIDTH,
+    height: props.size.HEIGHT,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundAttachment: "fixed",

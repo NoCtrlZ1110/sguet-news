@@ -1,4 +1,4 @@
-const SIZE = {
+var SIZE = {
   HEIGHT: 788,
   WIDTH: 940,
 };

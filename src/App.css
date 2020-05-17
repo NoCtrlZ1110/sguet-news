@@ -33,7 +33,7 @@ body {
 }
 
 #rectangle {
-  width: 100%;
+  width: 50%;
   height: 500px;
   background: white;
   border-radius: 10px;

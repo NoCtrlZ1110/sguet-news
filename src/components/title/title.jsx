@@ -9,7 +9,7 @@ export default function Title(props) {
         rel="stylesheet"
         crossOrigin="anonymous"
       ></link>
-      <h1 className="title ">{props.text}</h1>
+      <h1 className="title">{props.text}</h1>
     </>
   );
 }
