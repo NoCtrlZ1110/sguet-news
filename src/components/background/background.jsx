@@ -14,7 +14,23 @@ export default function Background(props) {
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
+    zIndex: -1,
   };
 
-  return <div style={bgStyle}>{props.children}</div>;
+  let maskStyle = {
+    width: props.size.WIDTH,
+    height: props.size.HEIGHT,
+    // backgroundPosition: "center",
+    position: "absolute",
+    background: "black",
+    opacity: 0.5,
+    zIndex: 0,
+  };
+
+  return (
+    <>
+      <div id="black" style={maskStyle}></div>
+      <div style={bgStyle}>{props.children}</div>
+    </>
+  );
 }

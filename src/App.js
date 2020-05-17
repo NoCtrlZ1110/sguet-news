@@ -16,22 +16,41 @@ function App() {
   const [text, setText] = useState("Thông Báo");
 
   function getLatestNews() {
-    fetch("http://localhost:8080/SGUET/latest")
+    fetch("https://uet-get-news.herokuapp.com/SGUET/latest")
       .then((response) => response.json())
       .then((data) => setText(data.title));
+  }
+
+  function getHTML() {
+    addStyle(`#black {top:0;left:0;}`);
+    var data = document.getElementById("NoCtrlZ");
+    return data;
+  }
+
+  function addStyle(styles) {
+    var css = document.createElement("style");
+    css.type = "text/css";
+    if (css.styleSheet) css.styleSheet.cssText = styles;
+    else css.appendChild(document.createTextNode(styles));
+    document.getElementsByTagName("head")[0].appendChild(css);
+  }
+
+  function removeProperty() {
+    var element = document.querySelector("#black");
+    element.style.setProperty("top", "initial");
+    element.style.setProperty("left", "initial");
   }
 
   function downloadHandler(event) {
     event.preventDefault();
     domtoimage
-      .toBlob(document.getElementById("NoCtrlZ"), {
+      .toBlob(getHTML(), {
         width: size.WIDTH,
         height: size.HEIGHT,
         quality: 1,
-        style: {},
       })
       .then(function (blob) {
-        console.log(blob);
+        removeProperty();
         saveAs(blob, "myImage.png");
       });
   }
@@ -63,13 +82,13 @@ function App() {
             >
               Download image
             </button>
-            <button className="btn btn-success my-3" onClick={changeSize}>
+            <button className="btn btn-success mt-3" onClick={changeSize}>
               Change Size
             </button>
-            <button className="btn btn-success" onClick={changeText}>
+            <button className="btn btn-success mt-3" onClick={changeText}>
               Change Text
             </button>
-            <button className="btn btn-success" onClick={getLatestNews}>
+            <button className="btn btn-success mt-3" onClick={getLatestNews}>
               Get Latest News
             </button>
           </div>
