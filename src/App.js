@@ -30,8 +30,7 @@ function App() {
   return (
     <div className="App">
       <Row>
-        <Col className="" xs={8}>
-          <div id="space"></div>
+        <Col className="" xs={7}>
           <div className="middle mt-5" id="mainArea">
             <div id="NoCtrlZ">
               <Background image={image}>
@@ -42,12 +41,26 @@ function App() {
           </div>
         </Col>
         <Col className="middle" xs={4}>
-          <button
-            className="btn btn-success"
-            onClick={downloadHandler.bind(this)}
-          >
-            Download image
-          </button>
+          <div className="text-center middle" id="rectangle">
+            <button
+              className="btn btn-success"
+              onClick={downloadHandler.bind(this)}
+            >
+              Download image
+            </button>
+            <button
+              className="btn btn-success my-3"
+              onClick={downloadHandler.bind(this)}
+            >
+              Download image
+            </button>
+            <button
+              className="btn btn-success"
+              onClick={downloadHandler.bind(this)}
+            >
+              Download image
+            </button>
+          </div>
         </Col>
       </Row>
     </div>
