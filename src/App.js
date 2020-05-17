@@ -14,6 +14,13 @@ import Container from "react-bootstrap/Container";
 function App() {
   const [size, setSize] = useState(SIZE);
   const [text, setText] = useState("Thông Báo");
+
+  function getLatestNews() {
+    fetch("http://localhost:8080/SGUET/latest")
+      .then((response) => response.json())
+      .then((data) => setText(data.title));
+  }
+
   function downloadHandler(event) {
     event.preventDefault();
     domtoimage
@@ -38,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <div className="d-flex">
-        <div class="flex-fill">
+        <div className="flex-fill">
           <div className="middle mt-5" id="mainArea">
             <div id="NoCtrlZ">
               <Background size={size} image={image}>
@@ -48,7 +55,7 @@ function App() {
             </div>
           </div>
         </div>
-        <div class="flex-fill align-self-center">
+        <div className="flex-fill align-self-center">
           <div className="text-center middle" id="rectangle">
             <button
               className="btn btn-success"
@@ -61,6 +68,9 @@ function App() {
             </button>
             <button className="btn btn-success" onClick={changeText}>
               Change Text
+            </button>
+            <button className="btn btn-success" onClick={getLatestNews}>
+              Get Latest News
             </button>
           </div>
         </div>
