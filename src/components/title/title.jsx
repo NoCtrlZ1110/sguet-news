@@ -7,9 +7,9 @@ export default function Title(props) {
       <link
         href="https://fonts.googleapis.com/css?family=Tangerine"
         rel="stylesheet"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       ></link>
-      <h1 className="title">{props.text}</h1>;
+      <h1 className="title ">{props.text}</h1>
     </>
   );
 }

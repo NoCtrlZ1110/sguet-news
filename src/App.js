@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Background from "./components/background/background";
 import Title from "./components/title/title";
 import Subtitle from "./components/subtitle/subtitle";
@@ -6,13 +6,17 @@ import { saveAs } from "file-saver";
 import domtoimage from "dom-to-image";
 import image from "./image/VNU.jpg";
 import "./App.css";
+import SIZE from "./const";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
 function downloadHandler(event) {
   event.preventDefault();
   domtoimage
     .toBlob(document.getElementById("NoCtrlZ"), {
-      width: 1500,
-      // height: 1000,
+      width: SIZE.WIDTH,
+      height: SIZE.HEIGHT,
       quality: 1,
       style: {},
     })
@@ -25,18 +29,27 @@ function downloadHandler(event) {
 function App() {
   return (
     <div className="App">
-      <button
-        className="btn btn-success btn-download"
-        onClick={downloadHandler.bind(this)}
-      >
-        Download image
-      </button>
-      <div id="NoCtrlZ">
-        <Background image={image}>
-          <Title text="Nguyễn Văn Huy" />
-          <Subtitle text="A little boy trying to code a website" />
-        </Background>
-      </div>
+      <Row>
+        <Col className="" xs={8}>
+          <div id="space"></div>
+          <div className="middle mt-5" id="mainArea">
+            <div id="NoCtrlZ">
+              <Background image={image}>
+                <Title text="Thông Báo" />
+                <Subtitle text="A little boy trying to code a website" />
+              </Background>
+            </div>
+          </div>
+        </Col>
+        <Col className="middle" xs={4}>
+          <button
+            className="btn btn-success"
+            onClick={downloadHandler.bind(this)}
+          >
+            Download image
+          </button>
+        </Col>
+      </Row>
     </div>
   );
 }

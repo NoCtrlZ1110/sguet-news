@@ -7,9 +7,8 @@ export default function Subtitle(props) {
       <link
         href="https://fonts.googleapis.com/css?family=Tangerine"
         rel="stylesheet"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       ></link>
-
       <h1 className="subtitle">{props.text}</h1>
     </>
   );
