@@ -7,38 +7,35 @@ import domtoimage from "dom-to-image";
 import image from "./image/VNU.jpg";
 import "./App.css";
 import SIZE from "./const";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import BodyArea from "./components/bodyArea/BodyArea";
 
 function App() {
   const [size, setSize] = useState(SIZE);
   const [text, setText] = useState("Thông Báo");
 
   function getLatestNews() {
-    fetch("https://uet-get-news.herokuapp.com/SGUET/latest")
+    fetch("https://noctrlz.herokuapp.com/SGUET/latest")
       .then((response) => response.json())
       .then((data) => setText(data.title));
   }
 
   function getHTML() {
-    addStyle(`#black {top:0;left:0;}`);
-    var data = document.getElementById("NoCtrlZ");
-    return data;
+    editStyle();
+    return document.getElementById("NoCtrlZ");
   }
 
-  function addStyle(styles) {
-    var css = document.createElement("style");
-    css.type = "text/css";
-    if (css.styleSheet) css.styleSheet.cssText = styles;
-    else css.appendChild(document.createTextNode(styles));
-    document.getElementsByTagName("head")[0].appendChild(css);
+  function editStyle() {
+    document.getElementById("black").style.top = 0;
+    document.getElementById("black").style.left = 0;
+    document.getElementById("black").style.width = "100%";
+    document.getElementById("black").style.height = "100%";
   }
 
-  function removeProperty() {
-    var element = document.querySelector("#black");
-    element.style.setProperty("top", "initial");
-    element.style.setProperty("left", "initial");
+  function removeStyle() {
+    document.getElementById("black").style.top = "initial";
+    document.getElementById("black").style.left = "initial";
+    document.getElementById("black").style.width = size.WIDTH + "px";
+    document.getElementById("black").style.height = size.HEIGHT + "px";
   }
 
   function downloadHandler(event) {
@@ -48,9 +45,13 @@ function App() {
         width: size.WIDTH,
         height: size.HEIGHT,
         quality: 1,
+        style: {
+          top: 0,
+          left: 0,
+        },
       })
       .then(function (blob) {
-        removeProperty();
+        removeStyle();
         saveAs(blob, "myImage.png");
       });
   }
@@ -69,7 +70,8 @@ function App() {
             <div id="NoCtrlZ">
               <Background size={size} image={image}>
                 <Title text={text} />
-                <Subtitle text="A little boy trying to code a website" />
+                <BodyArea />
+                <Subtitle text="--- from #sguet with love ---" />
               </Background>
             </div>
           </div>

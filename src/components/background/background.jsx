@@ -14,13 +14,11 @@ export default function Background(props) {
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
-    zIndex: -1,
   };
 
   let maskStyle = {
     width: props.size.WIDTH,
     height: props.size.HEIGHT,
-    // backgroundPosition: "center",
     position: "absolute",
     background: "black",
     opacity: 0.5,
