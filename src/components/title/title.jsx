@@ -2,14 +2,24 @@ import React from "react";
 import "./title.css";
 
 export default function Title(props) {
+  let fontLink = `https://fonts.googleapis.com/css2?family=Anton&display=swap`;
+  if (props.font) fontLink += `&family=${props.font}`;
   return (
     <>
-      <link
-        href="https://fonts.googleapis.com/css?family=Tangerine"
-        rel="stylesheet"
-        crossOrigin="anonymous"
-      ></link>
-      <h1 className="title">{props.text}</h1>
+      <link href={fontLink} rel="stylesheet" crossOrigin="anonymous"></link>
+      <b>
+        <h1
+          className="title"
+          style={{
+            fontSize: props.size,
+            color: props.color,
+            fontFamily: props.font,
+            fontWeight: props.fontWeight,
+          }}
+        >
+          {props.text}
+        </h1>
+      </b>
     </>
   );
 }

@@ -5,13 +5,18 @@ import Subtitle from "./components/subtitle/subtitle";
 import { saveAs } from "file-saver";
 import domtoimage from "dom-to-image";
 import image from "./image/VNU.jpg";
-import "./App.css";
 import SIZE from "./const";
 import BodyArea from "./components/bodyArea/BodyArea";
+import UET from "./image/UET.png";
+import "./App.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import MetaTags from "react-meta-tags";
+import html2canvas from "html2canvas";
 
 function App() {
   const [size, setSize] = useState(SIZE);
-  const [text, setText] = useState("Thông Báo");
+  const [text, setText] = useState("Title will go here!");
 
   function getLatestNews() {
     fetch("https://noctrlz.herokuapp.com/SGUET/latest")
@@ -27,8 +32,8 @@ function App() {
   function editStyle() {
     document.getElementById("black").style.top = 0;
     document.getElementById("black").style.left = 0;
-    document.getElementById("black").style.width = "100%";
-    document.getElementById("black").style.height = "100%";
+    document.getElementById("black").style.width = "120%";
+    document.getElementById("black").style.height = "120%";
   }
 
   function removeStyle() {
@@ -38,22 +43,23 @@ function App() {
     document.getElementById("black").style.height = size.HEIGHT + "px";
   }
 
+  // function printToPNG() {
+  //   html2canvas(document.getElementById("NoCtrlZ")).then((canvas) => {
+  //     canvas.toBlob((blob) => {
+  //       removeStyle();
+  //       saveAs(blob, "myImage.png");
+  //     });
+  //   });
+  // }
+
   function downloadHandler(event) {
     event.preventDefault();
-    domtoimage
-      .toBlob(getHTML(), {
-        width: size.WIDTH,
-        height: size.HEIGHT,
-        quality: 1,
-        style: {
-          top: 0,
-          left: 0,
-        },
-      })
-      .then(function (blob) {
+    html2canvas(document.getElementById("NoCtrlZ")).then((canvas) => {
+      canvas.toBlob((blob) => {
         removeStyle();
         saveAs(blob, "myImage.png");
       });
+    });
   }
   function changeSize() {
     if (size.HEIGHT !== 900) setSize({ HEIGHT: 900, WIDTH: 1200 });
@@ -68,9 +74,28 @@ function App() {
         <div className="flex-fill">
           <div className="middle mt-5" id="mainArea">
             <div id="NoCtrlZ">
+              <MetaTags>
+                <meta charset="UTF-8" />
+              </MetaTags>
               <Background size={size} image={image}>
-                <Title text={text} />
-                <BodyArea />
+                <br />
+                <Row style={{ minWidth: 700 }}>
+                  <Col xs={5} className="align-self-center">
+                    <Title text="Thông Báo" />
+                  </Col>
+                  <Col xs={4} />
+                  <Col>
+                    <img
+                      className="text-right"
+                      src={UET}
+                      alt="UET"
+                      width="100"
+                      height="100"
+                      style={{ zIndex: 1 }}
+                    />
+                  </Col>
+                </Row>
+                <BodyArea title={text} />
                 <Subtitle text="--- from #sguet with love ---" />
               </Background>
             </div>

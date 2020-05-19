@@ -1,9 +1,11 @@
+
 .title {
-    font-family: "Roboto", sans-serif;
+    font-family: "Anton", sans-serif;
     margin: 0;
     color: #fff;
-    text-emphasis-color: red;
-    font-size: 40px;
-    font-weight: 900;
+    font-weight: 500;
     z-index: 1;
+    font-size: 45px;
+
 }
+
