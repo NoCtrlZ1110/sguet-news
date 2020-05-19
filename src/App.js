@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Background from "./components/background/background";
 import Title from "./components/title/title";
 import Subtitle from "./components/subtitle/subtitle";
@@ -16,6 +16,11 @@ import html2canvas from "html2canvas";
 function App() {
   const [size, setSize] = useState(SIZE);
   const [text, setText] = useState("Title will go here!");
+  const [content, setContent] = useState(
+    `\tPhòng Đào tạo (ĐT) xin gửi đến các đơn vị Dự kiến Lịch thi học kỳ II, năm học 2019-2020 của các lớp đại học hệ chính quy, đề nghị Lãnh đạo đơn vị thông báo cho cán bộ thuộc đơn vị mình quản lý và mời giảng: nếu cần đề nghị thay đổi về thời gian, hình thức thi,… thì liên hệ trực tiếp với chuyên viên Nguyễn Thị Thu Thảo, Phòng ĐT (024. 37547865, * thaontt@vnu.edu.vn) trước ngày 20/05/2020. \n\n\tCác sinh viên cần xem kỹ Dự kiến lịch thi, nếu có vướng mắc cần viết Giấy đề nghị cụ thể và nộp cho Bộ phận tiếp người học (P.104-E3). Sinh viên phải trình Thẻ sinh viên mới được dự thi, sinh viên nào chưa có, bị mất hoặc hỏng Thẻ sinh viên phải đến bộ phận tiếp người học làm thủ tục xin cấp lại.Mọi đề nghị sau ngày 20/05/2020 sẽ không được giải quyết.`
+  );
+
+  useEffect(() => {});
 
   function getLatestNews() {
     fetch("https://noctrlz.herokuapp.com/SGUET/latest")
@@ -44,6 +49,19 @@ function App() {
   }
   return (
     <div className="App">
+      <iframe
+        id="nodeGarden"
+        title="node-garden"
+        src="https://nodegarden.js.org/"
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          zIndex: -2,
+          border: "none",
+          marginRight: "185px",
+        }}
+      ></iframe>
       <div className="d-flex">
         <div className="flex-fill">
           <div className="middle mt-5" id="mainArea">
@@ -69,7 +87,7 @@ function App() {
                     />
                   </Col>
                 </Row>
-                <BodyArea title={text} />
+                <BodyArea title={text.toUpperCase()} content={content} />
                 <Subtitle text="--- from #sguet with love ---" />
               </Background>
             </div>

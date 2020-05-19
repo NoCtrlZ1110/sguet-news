@@ -1,18 +1,18 @@
 .bodyArea {
-    color: white;
-    /* z-index: 1; */
-    margin: 20px;
+  color: white;
+  /* z-index: 1; */
+  margin: 20px;
 }
 
 #text-box {
-    width: 750px;
-    height: 500px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 10px 10px 20px rgba(44, 70, 139, 0.712);
-    opacity: 0.85;
+  width: 750px;
+  height: 500px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgba(44, 70, 139, 0.712);
+  opacity: 0.85;
 }
 
 #content {
-    color: black;
+  color: black;
 }

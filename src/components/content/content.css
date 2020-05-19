@@ -1,0 +1,12 @@
+.content {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    color: #fff;
+    font-weight: 500;
+    z-index: 1;
+    font-size: 45px;
+    white-space: pre-wrap;
+    text-align: justify;
+    tab-size: 20px;
+
+}
