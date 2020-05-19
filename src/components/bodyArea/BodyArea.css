@@ -1,6 +1,6 @@
 .bodyArea {
     color: white;
-    z-index: 1;
+    /* z-index: 1; */
     margin: 20px;
 }
 
@@ -12,6 +12,7 @@
     box-shadow: 10px 10px 20px rgba(44, 70, 139, 0.712);
     opacity: 0.85;
 }
+
 #content {
     color: black;
 }

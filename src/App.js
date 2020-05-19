@@ -3,7 +3,6 @@ import Background from "./components/background/background";
 import Title from "./components/title/title";
 import Subtitle from "./components/subtitle/subtitle";
 import { saveAs } from "file-saver";
-import domtoimage from "dom-to-image";
 import image from "./image/VNU.jpg";
 import SIZE from "./const";
 import BodyArea from "./components/bodyArea/BodyArea";
@@ -24,39 +23,14 @@ function App() {
       .then((data) => setText(data.title));
   }
 
-  function getHTML() {
-    editStyle();
-    return document.getElementById("NoCtrlZ");
-  }
-
-  function editStyle() {
-    document.getElementById("black").style.top = 0;
-    document.getElementById("black").style.left = 0;
-    document.getElementById("black").style.width = "120%";
-    document.getElementById("black").style.height = "120%";
-  }
-
-  function removeStyle() {
-    document.getElementById("black").style.top = "initial";
-    document.getElementById("black").style.left = "initial";
-    document.getElementById("black").style.width = size.WIDTH + "px";
-    document.getElementById("black").style.height = size.HEIGHT + "px";
-  }
-
-  // function printToPNG() {
-  //   html2canvas(document.getElementById("NoCtrlZ")).then((canvas) => {
-  //     canvas.toBlob((blob) => {
-  //       removeStyle();
-  //       saveAs(blob, "myImage.png");
-  //     });
-  //   });
-  // }
-
   function downloadHandler(event) {
     event.preventDefault();
-    html2canvas(document.getElementById("NoCtrlZ")).then((canvas) => {
+    html2canvas(document.getElementById("NoCtrlZ"), {
+      scale: 2,
+      scrollX: -window.scrollX,
+      scrollY: -window.scrollY,
+    }).then((canvas) => {
       canvas.toBlob((blob) => {
-        removeStyle();
         saveAs(blob, "myImage.png");
       });
     });
@@ -81,7 +55,7 @@ function App() {
                 <br />
                 <Row style={{ minWidth: 700 }}>
                   <Col xs={5} className="align-self-center">
-                    <Title text="Thông Báo" />
+                    <Title text="Thông Báo" size={60} />
                   </Col>
                   <Col xs={4} />
                   <Col>
