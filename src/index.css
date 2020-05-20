@@ -1,8 +1,4 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto-Regular'), url(./fonts/Roboto-Regular.ttf) format('ttf');
-}
 
 body {
   margin: 0;
