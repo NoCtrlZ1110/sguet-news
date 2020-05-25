@@ -2,8 +2,9 @@ import React from "react";
 import "./title.css";
 
 export default function Title(props) {
-  let fontLink = `https://fonts.googleapis.com/css2?family=Anton&display=swap`;
-  if (props.font) fontLink += `&family=${props.font}`;
+  let fontLink = `https://fonts.googleapis.com/css2?`;
+  if (props.font) fontLink += `family=${props.font}`;
+  else fontLink += `family=Anton`;
   return (
     <>
       <link href={fontLink} rel="stylesheet" crossOrigin="anonymous"></link>

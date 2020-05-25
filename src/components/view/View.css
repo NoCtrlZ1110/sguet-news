@@ -1,0 +1,40 @@
+#NoCtrlZ {
+  text-align: center;
+  align-self: center;
+  box-shadow: 10px 10px 10px rgb(53, 51, 51);
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+html,
+body {
+  height: 100%;
+  /* background-color: rgb(18, 106, 133); */
+}
+
+.btn {
+  width: 150px;
+  border-radius: 0px;
+}
+
+#rectangle {
+  width: 200px;
+  height: 260px;
+  background: white;
+  /* border-radius: 10px; */
+  box-shadow: 10px 10px 20px rgba(44, 70, 139, 0.712);
+}
+
+.ribbon {
+  opacity: 0;
+}
