@@ -1,5 +1,6 @@
 import React from "react";
 import "./content.css";
+import ContentEditable from "react-contenteditable";
 
 export default function Content(props) {
   let fontLink = `https://fonts.googleapis.com/css2?family=Anton&display=swap`;
@@ -15,6 +16,9 @@ export default function Content(props) {
             color: props.color,
             fontFamily: props.font,
             fontWeight: props.fontWeight,
+            paddingRight: 20,
+            paddingLeft: 20,
+            // paddingTop: 10,
           }}
         >
           {props.text}

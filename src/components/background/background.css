@@ -1,10 +1,9 @@
 #black {
-    width: 100px;
-    height: 100px;
-    background: black;
-    /* position: absolute; */
-    top: auto;
-    left: auto;
-    opacity: 0.5;
-    z-index: 0;
+  width: 100px;
+  height: 100px;
+  background: black;
+  top: auto;
+  left: auto;
+  opacity: 0.5;
+  z-index: 0;
 }

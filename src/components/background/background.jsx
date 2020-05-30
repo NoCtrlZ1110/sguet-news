@@ -4,16 +4,16 @@ import "./background.css";
 
 export default function Background(props) {
   let bgStyle = {
+    background: "",
     backgroundImage: `url(${props.image})`,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: props.size.WIDTH,
     width: props.size.WIDTH,
     height: props.size.HEIGHT,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundAttachment: "fixed",
+    flexDirection: "column",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   return (

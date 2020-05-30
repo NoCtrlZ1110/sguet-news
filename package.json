@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
     "@material-ui/core": "^4.10.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -13,10 +16,13 @@
     "dom-to-image-font-patch": "^1.0.1",
     "dom-to-image-google-font-issue": "^2.6.2",
     "file-saver": "^2.0.2",
+    "gymnast": "^18.0.1",
     "html2canvas": "^1.0.0-rc.5",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-contenteditable": "^3.3.4",
     "react-dom": "^16.13.1",
+    "react-draggable": "^4.4.2",
     "react-meta-tags": "^0.7.4",
     "react-scripts": "3.4.1"
   },

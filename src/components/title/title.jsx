@@ -1,5 +1,6 @@
 import React from "react";
 import "./title.css";
+import ContentEditable from "react-contenteditable";
 
 export default function Title(props) {
   let fontLink = `https://fonts.googleapis.com/css2?`;
@@ -16,6 +17,8 @@ export default function Title(props) {
             color: props.color,
             fontFamily: props.font,
             fontWeight: props.fontWeight,
+            paddingLeft: 40,
+            paddingTop: 10,
           }}
         >
           {props.text}
