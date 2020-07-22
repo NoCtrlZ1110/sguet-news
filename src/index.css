@@ -1,5 +1,10 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
+@font-face {
+  font-family: 'UTMNeutra';
+  src: local('UTMNeutra'), url(./assets/font/UTMNeutra.woff) format('woff');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

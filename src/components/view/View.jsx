@@ -1,31 +1,32 @@
+/* eslint-disable no-unused-vars */
 import "./View.css";
 import React, { useState, useEffect } from "react";
-import Background from "../background/background";
-import Title from "../title/title";
-import Subtitle from "../subtitle/subtitle";
 import { saveAs } from "file-saver";
-import image from "../../image/UETVNU.jpg";
 import SIZE from "../../const";
-import BodyArea from "../bodyArea/BodyArea";
-import BodyArea2 from "../bodyArea2/BodyArea2";
-import UET from "../../image/UET.png";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import html2canvas from "html2canvas";
-import GitHubLogo from "../../image/github.png";
+import GitHubLogo from "../../assets/images/github.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
 import { faNewspaper } from "@fortawesome/free-solid-svg-icons";
-import { Grid } from "gymnast";
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import Draggable from "react-draggable";
+import Style1 from "../template/Style1";
+import Style2 from "../template/Style2";
+import axios from "axios";
+
 // const axios = require("axios");
 export default function View(props) {
   const [size, setSize] = useState(SIZE);
+  const [screenShot, setScreenShot] = useState(null);
+  const [drag, setDrag] = useState(false);
+  const [edit, setEdit] = useState(true);
   const [text, setText] = useState("Title will go here!");
+
   const [content, setContent] = useState(
-    `\tPhòng Đào tạo (ĐT) xin gửi đến các đơn vị Dự kiến Lịch thi học kỳ II, năm học 2019-2020 của các lớp đại học hệ chính quy, đề nghị Lãnh đạo đơn vị thông báo cho cán bộ thuộc đơn vị mình quản lý và mời giảng: nếu cần đề nghị thay đổi về thời gian, hình thức thi,… thì liên hệ trực tiếp với chuyên viên Nguyễn Thị Thu Thảo, Phòng ĐT (024. 37547865, * thaontt@vnu.edu.vn) trước ngày 20/05/2020. \n\n\tCác sinh viên cần xem kỹ Dự kiến lịch thi, nếu có vướng mắc cần viết Giấy đề nghị cụ thể và nộp cho Bộ phận tiếp người học (P.104-E3). [...]`
+    `Phòng Đào tạo (ĐT) xin gửi đến các đơn vị Dự kiến Lịch thi học kỳ II, năm học 2019 - 2020 của các lớp đại học hệ chính quy, đề nghị Lãnh đạo đơn vị thông báo cho cán bộ thuộc đơn vị mình quản lý và mời giảng: nếu cần đề nghị thay đổi về thời gian, hình thức thi,… thì liên hệ trực tiếp với chuyên viên Nguyễn Thị Thu Thảo, Phòng ĐT (024. 37547865, * thaontt@vnu.edu.vn) trước ngày 20/05/2020. [...]`
   );
 
   useEffect(() => {});
@@ -51,6 +52,7 @@ export default function View(props) {
       scale: 2,
       scrollX: -window.scrollX,
       scrollY: -window.scrollY,
+      letterRendering: 1,
     }).then((canvas) => {
       canvas.toBlob((blob) => {
         saveAs(blob, "myImage.png");
@@ -65,66 +67,17 @@ export default function View(props) {
     setText("Dự kiến lịch thi học kỳ II năm học 2019-2020");
   }
 
-  let maskStyle = {
-    width: size.WIDTH,
-    height: size.HEIGHT,
-    position: "absolute",
-    background: "black",
-    opacity: 0.5,
-    zIndex: 0,
-  };
-
-  function style1() {
-    return (
-      <>
-        <Background size={size} image={image}>
-          <div id="black" style={maskStyle}></div>
-
-          <br />
-          <Row style={{ minWidth: 700 }}>
-            <Col xs={6} className="align-self-center">
-              <Title text="Thông Báo" size={70} />
-            </Col>
-            <Col xs={3} />
-            <Col xs={3}>
-              <img
-                className="text-right"
-                src={UET}
-                alt="UET"
-                width="100"
-                height="100"
-                style={{ zIndex: 1 }}
-              />
-            </Col>
-          </Row>
-          <BodyArea
-            title={text.toUpperCase()}
-            content={content}
-            font="Niramit"
-          />
-          <Subtitle className="middle" text="--- from #sguet with love ---" />
-        </Background>
-      </>
-    );
-  }
-
-  function style2() {
-    return (
-      <>
-        <Background size={size} image={image}>
-          <Grid size={5} margin={2}></Grid>
-
-          <BodyArea2
-            title={text.toUpperCase()}
-            content={content}
-            font="Niramit"
-            size={size}
-          />
-
-          {/* <Subtitle className="middle" text="--- from #sguet with love ---" /> */}
-        </Background>
-      </>
-    );
+  function getScrnsht(e) {
+    e.preventDefault();
+    const link = e.target.elements.link.value;
+    axios
+      .get(
+        `https://screenshotapi.net/api/v1/screenshot?url=${link}&token=REUXZIEP5RLXUEFS8PEF0RZTH15SJK5A&width=920&height=788&fresh=true`
+      )
+      .then((res) => {
+        const screenshot = res.data.screenshot;
+        setScreenShot(screenshot);
+      });
   }
 
   return (
@@ -142,6 +95,10 @@ export default function View(props) {
           marginRight: "185px",
         }}
       ></iframe>
+      <form onSubmit={getScrnsht}>
+        <input type="text" name="link" placeholder="Enter your Url here..." />
+        <button>Submit</button>
+      </form>
       <a href="https://github.com/NoCtrlZ1110/sguet-news">
         <img
           src={GitHubLogo}
@@ -162,12 +119,28 @@ export default function View(props) {
       </a>
       <div className="d-flex">
         <div className="flex-fill">
-          <div className="middle mt-5" id="mainArea">
-            <div id="NoCtrlZ">{style2()}</div>
+          <div className="middle mt-5">
+            <div id="NoCtrlZ">
+              <Style1
+                size={size}
+                text={text.toUpperCase()}
+                content={content}
+                edit={edit}
+                screenshot={screenShot}
+              />
+              {/* <Style2
+                size={size}
+                image={image}
+                drag={drag}
+                text={text}
+                edit={edit}
+                content={content}
+              /> */}
+            </div>
           </div>
         </div>
         <Draggable>
-          <div className="flex-fill align-self-center">
+          <div className="flex-fill align-self-center" style={{ zIndex: 2 }}>
             <div className="text-center middle" id="rectangle">
               <button
                 className="btn btn-success"
@@ -184,6 +157,26 @@ export default function View(props) {
               <button className="btn btn-success mt-3" onClick={changeText}>
                 Change Text
                 <FontAwesomeIcon id="icon" icon={faAlignLeft} />
+              </button>
+
+              <button
+                className="btn btn-success mt-3"
+                onClick={() => {
+                  setEdit((e) => !e);
+                }}
+              >
+                Edit Text
+                <FontAwesomeIcon id="icon" icon={faEdit} />
+              </button>
+
+              <button
+                className="btn btn-success mt-3"
+                onClick={() => {
+                  setDrag((d) => !d);
+                }}
+              >
+                Edit Position
+                <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
               </button>
 
               <button className="btn btn-success mt-3" onClick={getLatestNews}>

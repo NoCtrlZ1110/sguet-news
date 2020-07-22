@@ -1,15 +1,20 @@
 .bodyArea2 {
   color: white;
-  margin-top: 65px;
+  margin-top: 100px;
+  z-index: 2;
 }
 
 #text-box2 {
   background: rgb(32, 124, 208);
+  background: linear-gradient(0deg,
+      rgba(32, 124, 208, 1) 0%,
+      rgba(32, 53, 153, 1) 100%);
+  /* background: rgb(36, 100, 158);
   background: linear-gradient(
-    0deg,
-    rgba(32, 124, 208, 1) 0%,
-    rgba(32, 53, 153, 1) 100%
-  );
+    180deg,
+    rgba(36, 100, 158, 1) 0%,
+    rgba(48, 173, 228, 1) 79%
+  ); */
 }
 
 #content2 {

@@ -15,13 +15,16 @@ export default function Title(props) {
           style={{
             fontSize: props.size,
             color: props.color,
-            fontFamily: props.font,
+            fontFamily: "UTMNeutra",
             fontWeight: props.fontWeight,
-            paddingLeft: 40,
-            paddingTop: 10,
+            paddingLeft: 60,
+            paddingRight: 60,
+            paddingTop: 290,
+            lineHeight: 1.5,
+            ...props.style,
           }}
         >
-          {props.text}
+          <ContentEditable disabled={props.edit} html={props.text} />
         </h1>
       </b>
     </>

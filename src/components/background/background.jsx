@@ -12,13 +12,20 @@ export default function Background(props) {
     height: props.size.HEIGHT,
     flexDirection: "column",
     display: "flex",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
   };
 
   return (
     <>
-      <div style={bgStyle}>{props.children}</div>
+      <div style={bgStyle}>
+        {props.screenshot ? (
+          <img src={props.screenshot} alt="link" />
+        ) : (
+          <p>Please enter your link.</p>
+        )}
+        {props.children}
+      </div>
     </>
   );
 }

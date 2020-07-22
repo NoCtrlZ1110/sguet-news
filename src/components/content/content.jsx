@@ -21,7 +21,7 @@ export default function Content(props) {
             // paddingTop: 10,
           }}
         >
-          {props.text}
+          <ContentEditable disabled={props.edit} html={props.text} />
         </h1>
       </b>
     </>
