@@ -14,7 +14,7 @@ export default function Title(props) {
           fontWeight: props.fontWeight,
           paddingLeft: 60,
           paddingRight: 60,
-          paddingTop: 290,
+          paddingTop: 320,
           lineHeight: 1.5,
           ...props.style,
         }}

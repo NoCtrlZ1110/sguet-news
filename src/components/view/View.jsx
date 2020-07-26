@@ -1,5 +1,5 @@
 import "./View.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
 import GitHubLogo from "../../assets/images/github.png";
@@ -13,11 +13,17 @@ import {
   faExchangeAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { API, TOKEN } from "../../const";
+import { API, TOKEN, COLORS } from "../../const";
 
 export default function View(props) {
   const [text, setText] = useState("Title will go here!");
+  const [index, setIndex] = useState(0);
+  const [color, setColor] = useState(COLORS[index]);
   const [screenshot, setScreenShot] = useState(null);
+
+  useEffect(() => {
+    setColor(COLORS[index]);
+  }, [index]);
 
   function getScrnsht(link) {
     axios.get(`${API}${link}&token=${TOKEN}`).then((res) => {
@@ -64,6 +70,13 @@ export default function View(props) {
   let changeText = () => {
     setText("Dự kiến lịch thi học kỳ II năm học 2019-2020");
   };
+  let changeColor = () => {
+    console.log(index);
+    if (index < COLORS.length - 1) {
+      setIndex(index + 1);
+    } else setIndex(0);
+    setColor(COLORS[index]);
+  };
 
   let controlPanel = () => {
     return (
@@ -78,21 +91,17 @@ export default function View(props) {
               <FontAwesomeIcon id="icon" icon={faDownload} />
               Download
             </Button>
-            <Button
-              type="primary"
-              className="btn btn-success mt-3"
-              onClick={changeText}
-            >
+            <Button type="primary" className="btn mt-3" onClick={changeText}>
               Text
               <FontAwesomeIcon id="icon" icon={faAlignLeft} />
             </Button>
-            <Button type="primary" className="btn btn-success mt-3">
+            <Button type="primary" className="btn mt-3" onClick={changeColor}>
               Color
               <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
             </Button>{" "}
             <Button
               type="primary"
-              className="btn btn-success mt-3"
+              className="btn mt-3"
               onClick={() =>
                 getScrnsht(
                   "https://uet.vnu.edu.vn/trieu-tap-nguoi-hoc-tham-du-le-trao-bang-tot-nghiep-thang-07-nam-2020/"
@@ -153,7 +162,11 @@ export default function View(props) {
         <div className="flex-fill">
           <div className="middle mt-5">
             <div id="NoCtrlZ">
-              <Style1 text={text.toUpperCase()} screenshot={screenshot} />
+              <Style1
+                text={text.toUpperCase()}
+                screenshot={screenshot}
+                color={color}
+              />
             </div>
           </div>
         </div>
