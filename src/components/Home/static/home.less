@@ -17,20 +17,23 @@ body {
 
 a {
   transition: color .3s ease;
+
   &:focus {
     text-decoration: underline;
-    text-decoration-skip: ink;
+    text-decoration-skip: auto;
   }
 }
 
 .home-wrapper {
   width: 100%;
   color: #697b8c;
+
   .ant-btn {
     min-width: 110px;
     height: 40px;
     border-radius: 20px;
     font-size: 16px;
+
     &:hover {
       transform: translateY(-4px);
       box-shadow: 0 4px 12px rgba(24, 144, 255, .4);
@@ -49,6 +52,7 @@ svg g {
   max-width: 1500px;
   margin: auto;
   position: relative;
+
   .banner-title-wrapper {
     width: 40%;
     max-width: 480px;
@@ -59,25 +63,31 @@ svg g {
     left: 8%;
     margin: auto;
     z-index: 1;
-    > * {
+
+    >* {
       will-change: transform;
     }
+
     h1 {
       font-family: "Futura", "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 54px;
       margin: 12px 0;
     }
+
     p {
       font-size: 20px;
     }
+
     .button-wrapper {
       margin-top: 64px;
       line-height: 40px;
       align-items: center;
       display: flex;
+
       .github-btn {
         display: inline-block;
         height: 28px;
+
         .gh-btn {
           height: 28px;
           border-radius: 4px;
@@ -88,13 +98,16 @@ svg g {
           display: flex;
           padding: 0 12px;
           font-size: 13px;
+
           &:hover {
             color: @primary-color;
           }
+
           .gh-ico {
             margin-right: 8px;
           }
         }
+
         .gh-count {
           height: 28px;
           line-height: 22px;
@@ -106,11 +119,13 @@ svg g {
         }
       }
     }
+
     .title-line {
       transform: translateX(-64px);
       animation: bannerTitleLine 3s ease-in-out 0s infinite;
     }
   }
+
   .banner-image-wrapper {
     width: 45%;
     max-width: 598px;
@@ -132,6 +147,7 @@ svg g {
   height: 2px;
   width: 100%;
   overflow: hidden;
+
   .title-line {
     height: 100%;
     width: 64px;
@@ -142,12 +158,14 @@ svg g {
 
 .home-page {
   margin: 50px auto;
+
   h2 {
     text-align: center;
     font-weight: 300;
     font-size: 28px;
     color: #314659;
     letter-spacing: 0.6px;
+
     span {
       font-weight: 600;
     }
@@ -165,9 +183,11 @@ svg g {
 .page1 {
   height: 960px;
 }
+
 .page1-line.title-line-wrapper {
   width: 312px;
   margin: 24px auto 76px;
+
   .title-line {
     animation: page1TitleLine 3s ease-in-out 1.5s infinite;
   }
@@ -188,15 +208,18 @@ svg g {
   margin-bottom: 62px;
   display: flex;
   align-items: flex-start;
+
   li {
     width: 33.33%;
     display: inline-block;
     will-change: transform;
+
     .page1-box {
       width: 194px;
       margin: auto;
       text-align: center;
       position: relative;
+
       .page1-image {
         width: 80px;
         height: 80px;
@@ -210,9 +233,11 @@ svg g {
         background: #fff;
         transition: box-shadow .3s ease-out, transform .3s ease-out;
       }
+
       &:hover .page1-image {
         transform: translateY(-5px);
       }
+
       h3 {
         color: #0d1a26;
         font-size: 16px;
@@ -221,32 +246,40 @@ svg g {
     }
   }
 }
+
 .page1-point-wrapper {
   position: absolute;
   width: 0;
   left: 50%;
   top: 0;
+
   .point-0 {
     width: 4px;
     height: 4px;
   }
-  .point-2, .point-ring {
+
+  .point-2,
+  .point-ring {
     width: 10px;
     height: 10px;
   }
+
   .point-ring {
     border-style: solid;
     border-width: 1px;
     background: transparent !important;
   }
+
   .point-1 {
     width: 6px;
     height: 6px;
   }
+
   .point-3 {
     width: 15px;
     height: 15px;
   }
+
   i {
     display: inline-block;
     border-radius: 100%;
@@ -255,6 +288,7 @@ svg g {
     transform: translate(0, 30px);
   }
 }
+
 /** page2 **/
 .page2 {
   text-align: center;
@@ -292,38 +326,51 @@ svg g {
   font-family: @code-family;
   text-align: left;
   padding: 20px 50px;
+
   span {
     color: #f5222d;
   }
 }
 
 .home-code-comment {
-  color: @site-text-color-secondary !important;
+  color: @site-text-color-secondary  !important;
 }
 
 @keyframes bannerTitleLine {
-  0%, 25% {
+
+  0%,
+  25% {
     transform: translateX(-64px);
   }
-  75%, 100% {
+
+  75%,
+  100% {
     transform: translateX(544px);
   }
 }
 
 @keyframes page1TitleLine {
-  0%, 25% {
+
+  0%,
+  25% {
     transform: translateX(-64px);
   }
-  75%, 100% {
+
+  75%,
+  100% {
     transform: translateX(376px);
   }
 }
 
 @keyframes page2TitleLine {
-  0%, 25% {
+
+  0%,
+  25% {
     transform: translateX(-64px);
   }
-  75%, 100% {
+
+  75%,
+  100% {
     transform: translateX(178px);
   }
 }

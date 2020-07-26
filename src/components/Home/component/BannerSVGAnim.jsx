@@ -53,7 +53,7 @@ const animate = {
 };
 
 export default function () {
-  // safari 下取不到 transform 值，，所有动画在外层增加 g 标签。
+  // safari
   return (
     <svg className="home-banner-anim" width="100%" height="100%" viewBox="0 0 598 342" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
