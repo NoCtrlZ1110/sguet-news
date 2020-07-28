@@ -1,12 +1,10 @@
 import React from "react";
 
 import "./App.css";
-
-// import View from "./components/view/View";
-import Home from "./components/Home";
+import AppRouter from "./Router";
 
 function App() {
-  return <Home></Home>;
+  return <AppRouter />;
 }
 
 export default App;

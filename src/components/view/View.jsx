@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import { API, TOKEN, COLORS } from "../../const";
 
-export default function View(props) {
+export default function View() {
   const [text, setText] = useState("Title will go here!");
   const [index, setIndex] = useState(0);
   const [color, setColor] = useState(COLORS[index]);
