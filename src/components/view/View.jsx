@@ -2,7 +2,6 @@ import "./View.css";
 import React, { useEffect, useState } from "react";
 import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
-import GitHubLogo from "../../assets/images/github.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Draggable from "react-draggable";
 import Style1 from "../template/Style1";
@@ -15,7 +14,7 @@ import {
 import axios from "axios";
 import { API, TOKEN, COLORS } from "../../const";
 
-export default function View() {
+const View = () => {
   const [text, setText] = useState("Title will go here!");
   const [index, setIndex] = useState(0);
   const [color, setColor] = useState(COLORS[index]);
@@ -117,47 +116,8 @@ export default function View() {
     );
   };
 
-  let background = () => {
-    return (
-      <>
-        <iframe
-          id="nodeGarden"
-          title="node-garden"
-          src="https://nodegarden.js.org/"
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            zIndex: -2,
-            border: "none",
-            marginRight: "185px",
-          }}
-        ></iframe>
-        <a href="https://github.com/NoCtrlZ1110/sguet-news">
-          <img
-            src={GitHubLogo}
-            alt="NoCtrlZ1110"
-            id="githublogo"
-            style={{
-              transform: "rotate(45deg)",
-              position: "absolute",
-              borderRadius: "10px",
-              width: 35,
-              height: 35,
-              top: 10,
-              right: 10,
-              zIndex: 2,
-              backgroundColor: "white",
-            }}
-          ></img>
-        </a>
-      </>
-    );
-  };
-
   return (
     <div className="App">
-      {background()}
       <div className="d-flex">
         <div className="flex-fill">
           <div className="middle mt-5">
@@ -172,9 +132,14 @@ export default function View() {
         </div>
         {controlPanel()}
       </div>
+      <br />
+      <br />
+      <br />
     </div>
   );
-}
+};
+
+export default View;
 
 /* 
   function decodeHtml(html) {

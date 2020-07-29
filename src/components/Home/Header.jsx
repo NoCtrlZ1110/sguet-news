@@ -25,12 +25,16 @@ class Header extends React.Component {
     const menu = (
       <Menu mode={menuMode} id="nav" key="nav">
         <Menu.Item key="home">
-          <a>Home</a>
+          <a href="/">Home</a>
         </Menu.Item>
+
         <Menu.Item key="main">
-          <a>
+          <a href="/tool">
             <span>Generator</span>
           </a>
+        </Menu.Item>
+        <Menu.Item key="home">
+          <a href="https://www.facebook.com/SupportGroupUET/">SGUET</a>
         </Menu.Item>
       </Menu>
     );
@@ -56,10 +60,14 @@ class Header extends React.Component {
         ) : null}
         <Row>
           <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-            <div id="logo" to="/">
-              <img src={LOGO_URL} alt="logo" />
-              <span>SUPPORT GROUP UET</span>
-            </div>
+            <a href="/">
+              <div id="logo" to="/">
+                <img src={LOGO_URL} alt="logo" />
+                <>
+                  <b>SUPPORT GROUP UET</b>
+                </>
+              </div>
+            </a>
           </Col>
           <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
             <div className="header-meta">
@@ -70,7 +78,7 @@ class Header extends React.Component {
                   href="#"
                   rel="noopener noreferrer"
                 >
-                  <Button icon="eye-o">About</Button>
+                  <Button>About</Button>
                 </a>
               </div>
               {menuMode === "horizontal" ? <div id="menu">{menu}</div> : null}

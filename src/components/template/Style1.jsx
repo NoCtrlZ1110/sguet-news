@@ -1,6 +1,6 @@
 import React from "react";
-import Background from "../background/background";
-import Title from "../title/title";
+import Background from "../Background/background";
+import Title from "../Title/title";
 
 export default function Style1(props) {
   return (

@@ -6,6 +6,7 @@ import QueueAnim from "rc-queue-anim";
 import TweenOne from "rc-tween-one";
 import { Button } from "antd";
 import BannerSVGAnim from "./component/BannerSVGAnim";
+// import history from "../../services/history";
 
 function Banner(props) {
   return (
@@ -35,15 +36,15 @@ function Banner(props) {
           UETNEWS
           <br /> GENERATOR
         </h1>
-        <p key="content">From #NoCtrlZ with love 🥰</p>
+        <p key="content">A small gift for my #SGUET 🥰</p>
         <div key="button" className="button-wrapper">
-          <a
-            href="http://localhost:3000/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Button
+            type="primary"
+            onClick={() => (window.location.href = "/tool")}
           >
-            <Button type="primary">Get Started</Button>
-          </a>
+            Get Started
+          </Button>
+
           <a href="https://github.com/NoCtrlZ1110/sguet-news/">
             <Button style={{ margin: "0 16px" }} type="primary" ghost>
               Source Code

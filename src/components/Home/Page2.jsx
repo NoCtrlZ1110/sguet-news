@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from "react";
 import { OverPack } from "rc-scroll-anim";
 import QueueAnim from "rc-queue-anim";
@@ -24,21 +25,17 @@ function Page2() {
             className="page2-content"
           >
             <div key="button" style={{ marginTop: 88 }}>
-              <a
-                href="http://localhost:3000"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="/tool" target="_blank" rel="noopener noreferrer">
                 <Button type="primary">Get Started!</Button>
               </a>
 
               <a
-                href="http://localhost:3000"
+                href="https://github.com/NoCtrlZ1110/sguet-news/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Button type="primary" style={{ margin: "0 16px" }}>
-                  Star
+                  Star ⭐
                 </Button>
               </a>
             </div>
