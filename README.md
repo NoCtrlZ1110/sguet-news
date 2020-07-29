@@ -1,1 +1,1 @@
-### Star this project now!
+### A simple tool for #SGUET
