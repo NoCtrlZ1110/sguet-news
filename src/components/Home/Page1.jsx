@@ -198,7 +198,7 @@ class Page1 extends React.PureComponent {
         type="bottom"
         leaveReverse
         delay={[i * 100, (children.length - 1 - i) * 100]}
-        component="ul"
+        // component="ul"
       >
         {item}
       </QueueAnim>
