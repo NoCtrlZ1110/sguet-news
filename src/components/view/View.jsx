@@ -120,7 +120,7 @@ const View = () => {
     <div className="App">
       <div className="d-flex">
         <div className="flex-fill">
-          <div className="middle mt-5">
+          <div className="middle mt-5" style={{ opacity: 0 }}>
             <div id="NoCtrlZ">
               <Style1
                 text={text.toUpperCase()}

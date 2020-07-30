@@ -13,11 +13,11 @@ const validateMessages = {
   },
 };
 
-const handleSubmit = (e) => {
-  alert("Getting data from " + e.url);
-};
-
 function Banner(props) {
+  const handleSubmit = (e) => {
+    if (props.callback) props.callback(e.url);
+  };
+
   return (
     <div className="banner-wrapper">
       {props.isMobile && (
@@ -75,13 +75,14 @@ function Banner(props) {
             ]}
           >
             <Input
+              className="mt-4"
               size="large"
               placeholder="https://uet.vnu.edu.vn/..."
             ></Input>
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" className="mt-2" htmlType="submit">
+            <Button type="primary" className="mt-4" htmlType="submit" danger>
               Get Data!
             </Button>
           </Form.Item>
