@@ -5,6 +5,7 @@ import Tool from "./components/Tool/";
 // import View from "./components/view/View";
 import history from "./services/history";
 import { NotFound } from "./components/NotFound/NotFound";
+import View from "./components/view/View";
 
 const routes = [
   {
@@ -13,10 +14,16 @@ const routes = [
     exact: true,
   },
   {
+    path: "/view",
+    component: View,
+    exact: true,
+  },
+  {
     path: "/tool",
     component: Tool,
     exact: true,
   },
+
   {
     path: "*",
     component: NotFound,

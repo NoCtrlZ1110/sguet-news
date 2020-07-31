@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Draggable from "react-draggable";
 import Style1 from "../template/Style1";
 import { Button } from "antd";
 import {
@@ -13,12 +12,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { API, TOKEN, COLORS } from "../../const";
+import Header from "../Home/Header";
 
 const View = () => {
-  const [text, setText] = useState("Title will go here!");
+  const [text, setText] = useState(localStorage.getItem("title"));
   const [index, setIndex] = useState(0);
   const [color, setColor] = useState(COLORS[index]);
   const [screenshot, setScreenShot] = useState(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("capture")) {
+      convertScrnsht(localStorage.getItem("capture"));
+    }
+  }, []);
 
   useEffect(() => {
     setColor(COLORS[index]);
@@ -39,10 +45,8 @@ const View = () => {
       .then((response) => {
         response.arrayBuffer().then(function (buffer) {
           const url = window.URL.createObjectURL(new Blob([buffer]));
-          console.log(url);
           const link = document.createElement("a");
           link.href = url;
-          console.log(link);
           setScreenShot(link);
         });
       })
@@ -58,10 +62,9 @@ const View = () => {
       scale: 2,
       scrollX: -window.scrollX,
       scrollY: -window.scrollY,
-      // letterRendering: 1,
     }).then((canvas) => {
       canvas.toBlob((blob) => {
-        saveAs(blob, "myImage.png");
+        saveAs(blob, "UETNews.png");
       });
     });
   };
@@ -79,51 +82,50 @@ const View = () => {
 
   let controlPanel = () => {
     return (
-      <Draggable>
-        <div className="flex-fill align-self-center" style={{ zIndex: 2 }}>
-          <div className="middle" id="rectangle">
-            <Button
-              type="primary"
-              className="btn"
-              onClick={downloadHandler.bind(this)}
-            >
-              <FontAwesomeIcon id="icon" icon={faDownload} />
-              Download
-            </Button>
-            <Button type="primary" className="btn mt-3" onClick={changeText}>
-              Text
-              <FontAwesomeIcon id="icon" icon={faAlignLeft} />
-            </Button>
-            <Button type="primary" className="btn mt-3" onClick={changeColor}>
-              Color
-              <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
-            </Button>{" "}
-            <Button
-              type="primary"
-              className="btn mt-3"
-              onClick={() =>
-                getScrnsht(
-                  "https://uet.vnu.edu.vn/trieu-tap-nguoi-hoc-tham-du-le-trao-bang-tot-nghiep-thang-07-nam-2020/"
-                )
-              }
-            >
-              Test
-              <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
-            </Button>
-          </div>
+      <div className="flex-fill align-self-center" style={{ zIndex: 2 }}>
+        <div className="middle" id="rectangle">
+          <Button
+            type="primary"
+            className="btn"
+            onClick={downloadHandler.bind(this)}
+          >
+            <FontAwesomeIcon id="icon" icon={faDownload} />
+            Download
+          </Button>
+          <Button type="primary" className="btn mt-3" onClick={changeText}>
+            Text
+            <FontAwesomeIcon id="icon" icon={faAlignLeft} />
+          </Button>
+          <Button type="primary" className="btn mt-3" onClick={changeColor}>
+            Color
+            <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
+          </Button>{" "}
+          <Button
+            type="primary"
+            className="btn mt-3"
+            onClick={() =>
+              getScrnsht(
+                "https://uet.vnu.edu.vn/trieu-tap-nguoi-hoc-tham-du-le-trao-bang-tot-nghiep-thang-07-nam-2020/"
+              )
+            }
+          >
+            Test
+            <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
+          </Button>
         </div>
-      </Draggable>
+      </div>
     );
   };
 
   return (
     <div className="App">
+      <Header />
       <div className="d-flex">
         <div className="flex-fill">
-          <div className="middle mt-5" style={{ opacity: 0 }}>
+          <div className="middle mt-5">
             <div id="NoCtrlZ">
               <Style1
-                text={text.toUpperCase()}
+                text={text ? text.toUpperCase() : "Text will goes here 😎"}
                 screenshot={screenshot}
                 color={color}
               />
@@ -132,19 +134,8 @@ const View = () => {
         </div>
         {controlPanel()}
       </div>
-      <br />
-      <br />
-      <br />
     </div>
   );
 };
 
 export default View;
-
-/* 
-  function decodeHtml(html) {
-    var txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
-  }
- */

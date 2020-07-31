@@ -64,12 +64,15 @@ function Banner(props) {
                   if (
                     !value ||
                     getFieldValue("url")
+                      .toString()
                       .toLowerCase()
                       .indexOf("uet.vnu.edu.vn") !== -1
                   ) {
                     return Promise.resolve();
                   }
-                  return Promise.reject("Đây không phải đường dẫn của UETNews");
+                  return Promise.reject(
+                    "Đây không phải đường dẫn của website UET"
+                  );
                 },
               }),
             ]}

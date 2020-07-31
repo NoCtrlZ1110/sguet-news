@@ -4,6 +4,7 @@ import { SIZE } from "../../const";
 import Texture from "../../assets/images/texture.jpg";
 
 export default function Background(props) {
+  console.log(props.screenshot);
   let bgStyle = {
     background: "",
     backgroundImage: `url(${props.image})`,

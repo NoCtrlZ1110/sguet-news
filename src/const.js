@@ -10,5 +10,7 @@ export const SIZE = {
 };
 export const API = "https://screenshotapi.net/api/v1/screenshot?url=";
 export const TOKEN = "REUXZIEP5RLXUEFS8PEF0RZTH15SJK5A";
-
+export const UET =
+  "- Trường Đại học Công nghệ, ĐHQGHN - Univeristy of Engineering and Technology";
+export const PROXY = "https://cors-anywhere.herokuapp.com/";
 export const COLORS = [Blue, Green, Red, Pink, Yellow];
