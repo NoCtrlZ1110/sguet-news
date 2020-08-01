@@ -36,7 +36,7 @@ class Header extends React.Component {
         </Menu.Item>
 
         <Menu.Item key="main">
-          <a href="/tool">
+          <a href="/#/tool">
             <span>Generator</span>
           </a>
         </Menu.Item>

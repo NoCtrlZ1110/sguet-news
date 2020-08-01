@@ -40,7 +40,7 @@ function Banner(props) {
         <div key="button" className="button-wrapper">
           <Button
             type="primary"
-            onClick={() => (window.location.href = "/tool")}
+            onClick={() => (window.location.href = "/#/tool")}
           >
             Get Started
           </Button>

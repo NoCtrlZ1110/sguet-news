@@ -9,13 +9,13 @@ import {
   faDownload,
   faAlignLeft,
   faExchangeAlt,
+  faChevronCircleLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-import { API, TOKEN, COLORS } from "../../const";
+import { COLORS } from "../../const";
 import Header from "../Home/Header";
 
 const View = () => {
-  const [text, setText] = useState(localStorage.getItem("title"));
+  const [text] = useState(localStorage.getItem("title"));
   const [index, setIndex] = useState(0);
   const [color, setColor] = useState(COLORS[index]);
   const [screenshot, setScreenShot] = useState(null);
@@ -29,13 +29,6 @@ const View = () => {
   useEffect(() => {
     setColor(COLORS[index]);
   }, [index]);
-
-  function getScrnsht(link) {
-    axios.get(`${API}${link}&token=${TOKEN}`).then((res) => {
-      const scrnSht = res.data.screenshot;
-      convertScrnsht(scrnSht);
-    });
-  }
 
   const convertScrnsht = (url) => {
     fetch(url, {
@@ -69,11 +62,7 @@ const View = () => {
     });
   };
 
-  let changeText = () => {
-    setText("Dự kiến lịch thi học kỳ II năm học 2019-2020");
-  };
   let changeColor = () => {
-    console.log(index);
     if (index < COLORS.length - 1) {
       setIndex(index + 1);
     } else setIndex(0);
@@ -92,25 +81,22 @@ const View = () => {
             <FontAwesomeIcon id="icon" icon={faDownload} />
             Download
           </Button>
-          <Button type="primary" className="btn mt-3" onClick={changeText}>
-            Text
-            <FontAwesomeIcon id="icon" icon={faAlignLeft} />
-          </Button>
+
           <Button type="primary" className="btn mt-3" onClick={changeColor}>
             Color
             <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
-          </Button>{" "}
+          </Button>
+          <Button type="primary" className="btn mt-3" onClick={() => {}}>
+            Help
+            <FontAwesomeIcon id="icon" icon={faAlignLeft} />
+          </Button>
           <Button
             type="primary"
             className="btn mt-3"
-            onClick={() =>
-              getScrnsht(
-                "https://uet.vnu.edu.vn/trieu-tap-nguoi-hoc-tham-du-le-trao-bang-tot-nghiep-thang-07-nam-2020/"
-              )
-            }
+            onClick={() => (window.location.href = "/#/tool")}
           >
-            Test
-            <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
+            Go Back
+            <FontAwesomeIcon id="icon" icon={faChevronCircleLeft} />
           </Button>
         </div>
       </div>
