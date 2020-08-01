@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/sguet-news/precache-manifest.2e4683861fa5636ae3e0984d12ce8260.js"
+  "/sguet-news/precache-manifest.f8774ddc505ea9acc86597786d8afc6a.js"
 );
 
 self.addEventListener('message', (event) => {
