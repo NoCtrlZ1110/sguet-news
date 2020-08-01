@@ -26,7 +26,7 @@ export const Tool = () => {
   const [title, setTitle] = useState(null);
   const [capture, setCapture] = useState(null);
   const [isCaptured, setIsCaptured] = useState(false);
-  const [isGotData, setIsGotData] = useState(false);
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     enquireScreen((b) => {
@@ -37,20 +37,16 @@ export const Tool = () => {
   const callback = (url) => {
     setLoading(true);
     setSuccess(true);
-    getScrnsht(url);
+
     fetchData(url);
   };
 
-  const fetchData = async (url) => {
+  const fetchData = (url) => {
+    setStatus("Fetching Data ...");
     new Crawler({
       maxConnections: 10,
       callback: function (error, res, done) {
-        console.log(isCaptured);
-        setIsGotData(true);
-        // if (isCaptured) {
-        setVisible(true);
-        setLoading(false);
-        // }
+        getScrnsht(url);
         if (error) {
           console.log(error);
           setSuccess(false);
@@ -64,21 +60,19 @@ export const Tool = () => {
   };
 
   const getScrnsht = (link) => {
+    setStatus("Taking Screenshot ...");
     axios
       .get(`${API}${link}&token=${TOKEN}`)
       .then((res) => {
-        setIsCaptured(true);
-        if (isGotData) {
-          setVisible(true);
-          setLoading(false);
-        }
+        setVisible(true);
+        setLoading(false);
+
         setCapture(res.data.screenshot);
       })
       .catch((err) => {
         console.log("Lỗiii:" + err);
         setIsCaptured(true);
         setSuccess(false);
-        console.log(isCaptured);
       });
   };
 
@@ -88,7 +82,6 @@ export const Tool = () => {
         <div>
           <LoadingOverlay
             active={loading}
-            // spinner={}
             spinner={
               <div>
                 <SquareLoader
@@ -99,8 +92,7 @@ export const Tool = () => {
                   color={"#ffffff"}
                   loading={loading}
                 />
-                {!isGotData ? <span>Fetching Data</span> : ""}
-                {!isCaptured ? <span>Taking Screenshot</span> : ""}
+                {status ? status : ""}
               </div>
             }
           >
@@ -147,7 +139,7 @@ export const Tool = () => {
                 ) : null}
               </Content>
             </Layout>
-            <Card autoSize className="mt-4">
+            <Card className="mt-4">
               <b>
                 <TextArea
                   name="Title"

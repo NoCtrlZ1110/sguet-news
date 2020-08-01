@@ -73,7 +73,6 @@ const View = () => {
     setText("Dự kiến lịch thi học kỳ II năm học 2019-2020");
   };
   let changeColor = () => {
-    console.log(index);
     if (index < COLORS.length - 1) {
       setIndex(index + 1);
     } else setIndex(0);
