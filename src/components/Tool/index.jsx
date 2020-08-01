@@ -19,13 +19,13 @@ import "../Home/static/style";
 const { Sider, Content } = Layout;
 
 export const Tool = () => {
-  const [isMobile, setMobile] = useState(false);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(true);
   const [title, setTitle] = useState(null);
   const [capture, setCapture] = useState(null);
   const [status, setStatus] = useState(null);
+  const [isMobile, setMobile] = useState(false);
 
   useEffect(() => {
     enquireScreen((b) => {
@@ -91,6 +91,10 @@ export const Tool = () => {
                   loading={loading}
                 />
                 {status ? status : ""}
+                <br />
+                <br />
+                <br />
+                <br />
               </div>
             }
           >
@@ -138,13 +142,13 @@ export const Tool = () => {
               </Content>
             </Layout>
             <Card className="mt-4">
-              <b>
-                <TextArea
-                  name="Title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </b>
+              <b>Title to render (you can change it)</b>
+              <TextArea
+                className="mt-3"
+                name="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </Card>
           </div>
         ) : (

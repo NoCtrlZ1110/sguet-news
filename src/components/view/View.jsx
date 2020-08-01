@@ -5,30 +5,64 @@ import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Style1 from "../template/Style1";
 import { Button } from "antd";
+import { COLORS } from "../../const";
+import Header from "../Home/Header";
+import { enquireScreen } from "enquire-js";
 import {
   faDownload,
   faAlignLeft,
   faExchangeAlt,
   faChevronCircleLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { COLORS } from "../../const";
-import Header from "../Home/Header";
+import { Modal } from "antd";
+import { Col, Row } from "react-bootstrap";
+/* eslint-disable jsx-a11y/accessible-emoji */
 
 const View = () => {
   const [text] = useState(localStorage.getItem("title"));
   const [index, setIndex] = useState(0);
+  const [modalHelp, setModalHelp] = useState(false);
   const [color, setColor] = useState(COLORS[index]);
   const [screenshot, setScreenShot] = useState(null);
+  const [thumbnail, setThumbnail] = useState(null);
+  const [isMobile, setMobile] = useState(false);
 
   useEffect(() => {
+    enquireScreen((b) => {
+      setMobile(!!b);
+    });
     if (localStorage.getItem("capture")) {
       convertScrnsht(localStorage.getItem("capture"));
     }
+    setTimeout(() => takeThumbnail(), 1000);
   }, []);
 
   useEffect(() => {
     setColor(COLORS[index]);
   }, [index]);
+
+  useEffect(() => {
+    takeThumbnail();
+  }, [color]);
+
+  const closeModal = () => {
+    setModalHelp(false);
+  };
+
+  const takeThumbnail = () => {
+    html2canvas(document.getElementById("NoCtrlZ"), {
+      allowTaint: true,
+      scrollX: -window.scrollX,
+      scrollY: -window.scrollY,
+    }).then((canvas) => {
+      canvas.toBlob((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        setThumbnail(link);
+      });
+    });
+  };
 
   const convertScrnsht = (url) => {
     fetch(url, {
@@ -41,6 +75,7 @@ const View = () => {
           const link = document.createElement("a");
           link.href = url;
           setScreenShot(link);
+          // takeThumbnail();
         });
       })
       .catch((err) => {
@@ -71,7 +106,7 @@ const View = () => {
 
   let controlPanel = () => {
     return (
-      <div className="flex-fill align-self-center" style={{ zIndex: 2 }}>
+      <div className="flex-fill align-self-center">
         <div className="middle" id="rectangle">
           <Button
             type="primary"
@@ -86,7 +121,13 @@ const View = () => {
             Color
             <FontAwesomeIcon id="icon" icon={faExchangeAlt} />
           </Button>
-          <Button type="primary" className="btn mt-3" onClick={() => {}}>
+          <Button
+            type="primary"
+            className="btn mt-3"
+            onClick={() => {
+              setModalHelp(true);
+            }}
+          >
             Help
             <FontAwesomeIcon id="icon" icon={faAlignLeft} />
           </Button>
@@ -104,23 +145,89 @@ const View = () => {
   };
 
   return (
-    <div className="App">
+    <>
       <Header />
-      <div className="d-flex">
-        <div className="flex-fill">
-          <div className="middle mt-5">
-            <div id="NoCtrlZ">
-              <Style1
-                text={text ? text.toUpperCase() : "Text will goes here 😎"}
-                screenshot={screenshot}
-                color={color}
-              />
+      {!isMobile ? (
+        <div className="d-flex">
+          {/* for desktop */}
+          <div className="flex-fill">
+            <div className="middle mt-5">
+              <div id="NoCtrlZ">
+                <Style1
+                  text={text ? text.toUpperCase() : "Text will goes here 😎"}
+                  screenshot={screenshot}
+                  color={color}
+                />
+              </div>
             </div>
           </div>
+          {controlPanel()}
         </div>
-        {controlPanel()}
-      </div>
-    </div>
+      ) : (
+        <>
+          {/* for mobile */}
+          <div className="middle">{controlPanel()}</div>
+          <div
+            className="d-flex"
+            style={{ position: "absolute", opacity: 0, left: -700 }}
+          >
+            <div className="flex-fill">
+              <div className="middle mt-5">
+                <div id="NoCtrlZ">
+                  <Style1
+                    text={text ? text.toUpperCase() : "Text will goes here 😎"}
+                    screenshot={screenshot}
+                    color={color}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="middle">
+            {thumbnail ? (
+              <img
+                className="mt-5"
+                src={thumbnail}
+                width="75%"
+                id="shadow"
+                alt="😎😎😎"
+              ></img>
+            ) : null}
+          </div>
+        </>
+      )}
+
+      <Modal
+        title={<div className="text-center">How to use? </div>}
+        centered
+        visible={modalHelp}
+        onOk={() => closeModal()}
+        onCancel={() => closeModal()}
+        footer={[
+          <Button key="submit" type="dashed" onClick={() => closeModal()}>
+            I got it! 🥰🥰🥰
+          </Button>,
+        ]}
+      >
+        <Row>
+          <Col>
+            <b className="mb-3">❤ For Desktop ❤</b>
+            <p />
+            <p>- Tap on text to edit content directly</p>
+            <p>- Change color by pressing "Color" button</p>
+            <p>- Download image & upload to fanpage </p>
+            <p />
+          </Col>
+          <Col>
+            <b className="mb-3">❤ For Mobile ❤</b>
+            <p />
+            <p>- Can change color</p>
+            <p>- Can't edit content directly</p>
+            <p>- Download image & upload to fanpage </p>
+          </Col>
+        </Row>
+      </Modal>
+    </>
   );
 };
 

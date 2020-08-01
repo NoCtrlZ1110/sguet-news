@@ -26,7 +26,15 @@ function Page2() {
           >
             <div key="button" style={{ marginTop: 88 }}>
               <a href="/#/tool" rel="noopener noreferrer">
-                <Button type="primary">Get Started!</Button>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    document.body.scrollTop = 0; // For Safari
+                    document.documentElement.scrollTop = 0;
+                  }}
+                >
+                  Get Started!
+                </Button>
               </a>
 
               <a
