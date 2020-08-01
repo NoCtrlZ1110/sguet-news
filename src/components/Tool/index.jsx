@@ -25,7 +25,6 @@ export const Tool = () => {
   const [success, setSuccess] = useState(true);
   const [title, setTitle] = useState(null);
   const [capture, setCapture] = useState(null);
-  const [isCaptured, setIsCaptured] = useState(false);
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
@@ -71,7 +70,6 @@ export const Tool = () => {
       })
       .catch((err) => {
         console.log("Lỗiii:" + err);
-        setIsCaptured(true);
         setSuccess(false);
       });
   };
@@ -118,7 +116,7 @@ export const Tool = () => {
           setTimeout(() => {
             setLoading(false);
             setVisible(false);
-            window.location.href = "/view";
+            window.location.href = "/#/view/";
           }, 1000);
         }}
       >

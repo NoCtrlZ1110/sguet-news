@@ -25,7 +25,7 @@ function Page2() {
             className="page2-content"
           >
             <div key="button" style={{ marginTop: 88 }}>
-              <a href="/tool" target="_blank" rel="noopener noreferrer">
+              <a href="/#/tool" rel="noopener noreferrer">
                 <Button type="primary">Get Started!</Button>
               </a>
 
