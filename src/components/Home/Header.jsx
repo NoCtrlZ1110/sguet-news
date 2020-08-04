@@ -4,6 +4,7 @@ import React from "react";
 import { Row, Col, Menu, Button, Popover, Modal } from "antd";
 import Icon from "@ant-design/icons";
 import { enquireScreen } from "enquire-js";
+import { Link } from "react-router-dom";
 
 const LOGO_URL =
   "https://pbs.twimg.com/profile_images/446341618107305984/KCiLUHdh.png";
@@ -32,13 +33,13 @@ class Header extends React.Component {
     const menu = (
       <Menu mode={menuMode} id="nav" key="nav">
         <Menu.Item key="home">
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
         </Menu.Item>
 
         <Menu.Item key="main">
-          <a href="/#/tool">
+          <Link to="tool">
             <span>Generator</span>
-          </a>
+          </Link>
         </Menu.Item>
         <Menu.Item key="SGUET">
           <a href="https://www.facebook.com/SupportGroupUET/">SGUET</a>
@@ -68,14 +69,14 @@ class Header extends React.Component {
           ) : null}
           <Row>
             <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-              <a href="/">
+              <Link to="/">
                 <div id="logo" to="/">
                   <img src={LOGO_URL} alt="logo" />
                   <>
                     <b>SUPPORT GROUP UET</b>
                   </>
                 </div>
-              </a>
+              </Link>
             </Col>
             <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
               <div className="header-meta">

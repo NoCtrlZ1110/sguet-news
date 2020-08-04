@@ -14,3 +14,4 @@ export const UET =
   "- Trường Đại học Công nghệ, ĐHQGHN - Univeristy of Engineering and Technology";
 export const PROXY = "https://cors-anywhere.herokuapp.com/";
 export const COLORS = [Blue, Green, Red, Pink, Yellow];
+export const NEWS = "https://uet-get-news.herokuapp.com/sguet";

@@ -3,6 +3,7 @@ import React from "react";
 import { OverPack } from "rc-scroll-anim";
 import QueueAnim from "rc-queue-anim";
 import { Button } from "antd";
+import { Link } from "react-router-dom";
 
 function Page2() {
   return (
@@ -25,7 +26,7 @@ function Page2() {
             className="page2-content"
           >
             <div key="button" style={{ marginTop: 88 }}>
-              <a href="/#/tool" rel="noopener noreferrer">
+              <Link to="tool">
                 <Button
                   type="primary"
                   onClick={() => {
@@ -35,7 +36,7 @@ function Page2() {
                 >
                   Get Started!
                 </Button>
-              </a>
+              </Link>
 
               <a
                 href="https://github.com/NoCtrlZ1110/sguet-news/"
