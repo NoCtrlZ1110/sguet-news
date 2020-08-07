@@ -36,7 +36,6 @@ export const Tool = () => {
   const callback = (url) => {
     setLoading(true);
     setSuccess(true);
-
     fetchData(url);
   };
 
@@ -45,11 +44,13 @@ export const Tool = () => {
     new Crawler({
       maxConnections: 10,
       callback: function (error, res, done) {
-        getScrnsht(url);
         if (error) {
           console.log(error);
           setSuccess(false);
+          setVisible(true);
+          setLoading(false);
         } else {
+          getScrnsht(url);
           var $ = res.$;
           setTitle($("title").text().replace(UET, ""));
         }
@@ -65,12 +66,13 @@ export const Tool = () => {
       .then((res) => {
         setVisible(true);
         setLoading(false);
-
         setCapture(res.data.screenshot);
       })
       .catch((err) => {
-        console.log("Lỗiii:" + err);
         setSuccess(false);
+        setLoading(false);
+        setVisible(true);
+        console.log("Lỗiii:" + err);
       });
   };
 
