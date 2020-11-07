@@ -118,7 +118,7 @@ export const Tool = () => {
         callback={(setLoading) => {
           setLoading(true);
           localStorage.setItem("title", title);
-          localStorage.setItem("capture", capture);
+          localStorage.setItem("capture", PROXY + capture);
           setTimeout(() => {
             setLoading(false);
             setVisible(false);
