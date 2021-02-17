@@ -1,64 +1,38 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import QueueAnim from "rc-queue-anim";
-import TweenOne from "rc-tween-one";
-import BannerSVGAnim from "./component/BannerSVGAnim";
-import { Form, Modal, Button, Table } from "antd";
-import Search from "antd/lib/input/Search";
-import { NEWS } from "../../const";
-
-const validateMessages = {
-  required: "URL cần được nhập!",
-  types: {
-    url: "Đây không phải là một đường dẫn URL hợp lệ!",
-  },
-};
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import QueueAnim from 'rc-queue-anim';
+import TweenOne from 'rc-tween-one';
+import BannerSVGAnim from './component/BannerSVGAnim';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { NEWS } from '../../const';
+import { Divider } from 'antd';
 
 const Banner = (props) => {
   const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [visible, setVisible] = useState(false);
-
   const handleSubmit = (e) => {
-    if (props.callback) props.callback(e.url);
+    if (props.callback) props.callback(e);
   };
-
-  const columns = [
-    {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
-    },
-    {
-      title: "Action",
-      key: "url",
-      render: (text, record) => (
-        <Button
-          onClick={() => {
-            setVisible(false);
-            handleSubmit({ url: record.url });
-          }}
-        >
-          Select
-        </Button>
-      ),
-    },
-  ];
-
   const fetchData = async () => {
+    props.setLoading(true);
     fetch(NEWS)
       .then((res) => {
-        setLoading(false);
+        props.setLoading(false);
         return res.json();
       })
       .then(
         (result) => {
           let arr = [];
           result.forEach((e) => {
-            arr.push({ title: e.title, url: e.buttons[0].url });
+            arr.push({
+              title: e.title,
+              url: e.buttons[0].url,
+              thumbnail: e.image_url,
+            });
           });
           setNews(arr);
+          props.setLoading(false);
         },
         (error) => {
           console.log(error);
@@ -67,109 +41,73 @@ const Banner = (props) => {
   };
 
   useEffect(() => {
-    setLoading(true);
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      slidesToSlide: 3, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 770 },
+      items: 2,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 770, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
 
   return (
     <>
-      <div className="banner-wrapper">
-        {props.isMobile && (
-          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
-            <div className="home-banner-image">
-              <img
-                alt="banner"
-                src="https://gw.alipayobjects.com/zos/rmsportal/rqKQOpnMxeJKngVvulsF.svg"
-                width="100%"
-              />
-            </div>
-          </TweenOne>
-        )}
+      <div className='banner-wrapper container'>
         <QueueAnim
-          className="banner-title-wrapper"
-          type={props.isMobile ? "bottom" : "right"}
+          className='banner-title-wrapper'
+          type={props.isMobile ? 'bottom' : 'right'}
         >
-          <div key="line" className="title-line-wrapper">
+          <div key='line' className='title-line-wrapper'>
             <div
-              className="title-line"
-              style={{ transform: "translateX(-64px)" }}
+              className='title-line'
+              style={{ transform: 'translateX(-64px)' }}
             />
           </div>
-          <h1 key="h1">
-            Enter ↵
-            <br /> UET Link Here!
-          </h1>
-          <p key="content">From #NoCtrlZ with love 🥰</p>
-
-          <Form
-            name="nest-messages"
-            onFinish={handleSubmit}
-            validateMessages={validateMessages}
-          >
-            <Form.Item
-              name={["url"]}
-              rules={[
-                {
-                  required: true,
-                  type: "url",
-                },
-                ({ getFieldValue }) => ({
-                  validator(rule, value) {
-                    if (
-                      !value ||
-                      getFieldValue("url")
-                        .toString()
-                        .toLowerCase()
-                        .indexOf("uet.vnu.edu.vn") !== -1
-                    ) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      "Đây không phải đường dẫn của website UET"
-                    );
-                  },
-                }),
-              ]}
-            >
-              <Search
-                loading={loading}
-                className="mt-4"
-                color="#ffffff"
-                size="large"
-                enterButton={<Button>Latest 💗</Button>}
-                onSearch={() => {
-                  setVisible(true);
-                }}
-                placeholder="https://uet.vnu.edu.vn/..."
-              ></Search>
-            </Form.Item>
-
-            <Form.Item>
-              <Button type="primary" className="mt-4" htmlType="submit" danger>
-                Get Data!
-              </Button>
-            </Form.Item>
-          </Form>
+          <h1 key='h1'>Select UETNews Here!</h1>
+          <p key='content'>From #NoCtrlZ with love 🥰</p>
         </QueueAnim>
         {!props.isMobile && (
-          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
+          <TweenOne
+            animation={{ opacity: 1 }}
+            className='banner-image-wrapper ml-auto'
+          >
             <BannerSVGAnim />
           </TweenOne>
         )}
       </div>
-      <Modal
-        title="List of latest news"
-        centered
-        visible={visible}
-        onOk={() => setVisible(false)}
-        onCancel={() => setVisible(false)}
-      >
-        <Table
-          dataSource={news}
-          columns={columns}
-          pagination={{ pageSize: 5 }}
-        />
-      </Modal>
+      <div className='container'>
+        <Carousel responsive={responsive}>
+          {news.map((_news) => (
+            <div
+              className='news-item'
+              title={_news.title}
+              onClick={() => {
+                handleSubmit(_news);
+              }}
+            >
+              <div
+                className='thumbnail'
+                style={{ background: `url(${_news.thumbnail})` }}
+              ></div>
+              <Divider />
+              <div className='label'>{_news.title}</div>
+            </div>
+          ))}
+        </Carousel>
+      </div>
     </>
   );
 };

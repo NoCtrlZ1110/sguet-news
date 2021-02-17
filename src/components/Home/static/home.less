@@ -26,6 +26,7 @@ a {
 
 .home-wrapper {
   width: 100%;
+  min-height: calc(100vh - 187px);
   color: #697b8c;
 
   .ant-input-search-button {
@@ -57,21 +58,23 @@ svg g {
 }
 
 .banner-wrapper {
-  height: 526px;
+  // height: 526px;    
+  align-items: center;
   width: 100%;
-  max-width: 1500px;
-  margin: auto;
+  // max-width: 1500px;
+  margin: 20px auto 50px auto;
   position: relative;
+  display: flex;
 
   .banner-title-wrapper {
     width: 40%;
-    max-width: 480px;
-    height: 245px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 8%;
-    margin: auto;
+    // max-width: 480px;
+    // height: 330px;
+    // position: absolute;
+    // top: 0;
+    // bottom: 0;
+    // left: 8%;
+    // margin: auto;
     z-index: 1;
 
     >* {
@@ -139,12 +142,12 @@ svg g {
   .banner-image-wrapper {
     width: 45%;
     max-width: 598px;
-    height: 324px;
-    position: absolute;
-    right: 8%;
-    margin: auto;
-    top: 0;
-    bottom: 0;
+    // height: 324px;
+    // position: absolute;
+    // right: 8%;
+    // margin: auto;
+    // top: 0;
+    // bottom: 0;
     opacity: 0;
   }
 }

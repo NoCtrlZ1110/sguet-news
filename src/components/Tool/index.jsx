@@ -1,20 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import DocumentTitle from "react-document-title";
-import { enquireScreen } from "enquire-js";
-import PageHeader from "../Home/Header";
-import Banner from "./Banner";
-import Page1 from "./Page1";
-import PageFooter from "../Home/Footer";
-import ModalContainer from "./Modal";
-import SquareLoader from "react-spinners/PacmanLoader";
-import LoadingOverlay from "react-loading-overlay";
-import Crawler from "crawler";
-import { css } from "@emotion/core";
-import { PROXY, UET, API, TOKEN } from "../../const";
-import { Card, Layout } from "antd";
-import TextArea from "antd/lib/input/TextArea";
-import "../Home/static/style";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import DocumentTitle from 'react-document-title';
+import { enquireScreen } from 'enquire-js';
+import PageHeader from '../Home/Header';
+import Banner from './Banner';
+import Page1 from './Page1';
+import PageFooter from '../Home/Footer';
+import ModalContainer from './Modal';
+import SquareLoader from 'react-spinners/PacmanLoader';
+import LoadingOverlay from 'react-loading-overlay';
+import { css } from '@emotion/core';
+import { API } from '../../const';
+import { Card, Input, Layout } from 'antd';
+import './style.less';
 
 const { Sider, Content } = Layout;
 
@@ -33,121 +31,110 @@ export const Tool = () => {
     });
   }, []);
 
-  const callback = (url) => {
+  const callback = (news) => {
     setLoading(true);
     setSuccess(true);
-    fetchData(url);
+    fetchData(news);
   };
 
-  const fetchData = (url) => {
-    setStatus("Fetching Data ...");
-    new Crawler({
-      maxConnections: 10,
-      callback: function (error, res, done) {
-        if (error) {
-          console.log(error);
-          setSuccess(false);
-          setVisible(true);
-          setLoading(false);
-        } else {
-          getScrnsht(url);
-          var $ = res.$;
-          setTitle($("title").text().replace(UET, ""));
-        }
-        done();
-      },
-    }).queue(PROXY + url);
+  const fetchData = (news) => {
+    setStatus('Fetching Data ...');
+    setTitle(news.title);
+    getScrnsht(news.url);
   };
 
   const getScrnsht = (link) => {
-    setStatus("Taking Screenshot ...");
+    setStatus('Taking Screenshot ...');
     axios
-      .get(`${API}${link}&token=${TOKEN}`)
+      .post(API, { url: link })
       .then((res) => {
         setVisible(true);
         setLoading(false);
-        setCapture(res.data.screenshot);
+        setCapture(res.data.image);
       })
       .catch((err) => {
         setSuccess(false);
         setLoading(false);
         setVisible(true);
-        console.log("Lỗiii:" + err);
+        console.log('Lỗiii:' + err);
       });
   };
 
   return (
     <>
-      <DocumentTitle title="UETNews Generator">
-        <div>
-          <LoadingOverlay
-            active={loading}
-            spinner={
-              <div>
-                <SquareLoader
-                  css={css`
-                    display: block;
-                    margin-bottom: 100px;
-                  `}
-                  color={"#ffffff"}
-                  loading={loading}
-                />
-                {status ? status : ""}
-                <br />
-                <br />
-                <br />
-                <br />
-              </div>
-            }
-          >
-            <PageHeader isMobile={isMobile} />
-            <div className="home-wrapper">
-              <Banner isMobile={isMobile} callback={callback} />
+      {loading && (
+        <LoadingOverlay
+          className='overlay'
+          active={loading}
+          spinner={
+            <div>
+              <SquareLoader
+                css={css`
+                  display: block;
+                  margin-bottom: 50px;
+                `}
+                color={'#ffffff'}
+                loading={loading}
+              />
+              {status ? status : 'Just count to 10 ...'}
             </div>
-            <Page1 isMobile={isMobile} />
+          }
+        />
+      )}
+      <DocumentTitle title='UETNews Generator'>
+        <div>
+          <PageHeader isMobile={isMobile} />
+          <div className='home-wrapper'>
+            <Banner
+              isMobile={isMobile}
+              callback={callback}
+              setLoading={setLoading}
+            />
+          </div>
+          <Page1 isMobile={isMobile} />
 
-            <PageFooter />
-          </LoadingOverlay>
+          <PageFooter isMobile={isMobile} />
         </div>
       </DocumentTitle>
       <ModalContainer
         visible={visible}
         setVisible={setVisible}
-        title={success ? "Data fetched successfully!" : "Data fetched failed!"}
+        title={success ? 'Data fetched successfully!' : 'Data fetched failed!'}
         success={success}
         callback={(setLoading) => {
           setLoading(true);
-          localStorage.setItem("title", title);
-          localStorage.setItem("capture", PROXY + capture);
+          localStorage.setItem('title', title);
+          localStorage.setItem('capture', capture);
           setTimeout(() => {
             setLoading(false);
             setVisible(false);
-            window.location.href = "/#/view/";
+            window.location.href = '/#/view/';
           }, 1000);
         }}
+        style={{ width: 'fit-content' }}
       >
         {success ? (
           <div>
-            <Layout style={{ alignSelf: "center" }}>
-              <Sider theme="light">
+            <Layout style={{ alignSelf: 'center' }}>
+              <Sider theme='light'>
                 <img
-                  className="mr-4"
-                  src="https://media1.tenor.com/images/1b0948cd2ae915af0293e4641c441b09/tenor.gif"
-                  width="75%"
-                  alt="thành cmn công :>"
+                  className='mr-4'
+                  src='https://media1.tenor.com/images/1b0948cd2ae915af0293e4641c441b09/tenor.gif'
+                  width='75%'
+                  alt='thành cmn công :>'
                 />
               </Sider>
-              <Content style={{ alignSelf: "center" }}>
+              <Content style={{ alignSelf: 'center' }}>
                 {capture ? (
-                  <img src={capture} alt="capture" width="300px"></img>
+                  <img src={capture} alt='capture' height='300px'></img>
                 ) : null}
               </Content>
             </Layout>
-            <Card className="mt-4">
+            <Card className='mt-4'>
               <b>Title to render (you can change it)</b>
-              <TextArea
-                className="mt-3"
-                name="Title"
+              <Input
+                className='mt-3'
+                name='Title'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -157,10 +144,10 @@ export const Tool = () => {
           <>
             <h4>Failed, try again!</h4>
             <img
-              className="mr-4"
-              src="https://media1.tenor.com/images/9467bbf064b80e9065cdf10b26cbae5b/tenor.gif"
-              width="75%"
-              alt="sao lại fail nhở, khó hiểu vch :(("
+              className='mr-4'
+              src='https://media1.tenor.com/images/9467bbf064b80e9065cdf10b26cbae5b/tenor.gif'
+              width='75%'
+              alt='sao lại fail nhở, khó hiểu vch :(('
             />
           </>
         )}
