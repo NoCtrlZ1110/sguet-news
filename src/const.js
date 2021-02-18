@@ -8,7 +8,7 @@ export const SIZE = {
   HEIGHT: 788,
   WIDTH: 940,
 };
-export const API = 'http://uetgetnews.herokuapp.com/screenshot';
+export const API = 'https://uetgetnews.herokuapp.com/screenshot';
 export const UET =
   '- Trường Đại học Công nghệ, ĐHQGHN - Univeristy of Engineering and Technology';
 export const PROXY = 'https://cors-anywhere.herokuapp.com/';
