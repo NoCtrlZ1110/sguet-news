@@ -156,7 +156,7 @@ const View = () => {
         <div className='d-flex'>
           {/* for desktop */}
           <div className='flex-fill'>
-            <div className='middle mt-5'>
+            <div className='middle mx-5'>
               <div id='NoCtrlZ'>
                 <Style1
                   text={text ? text.toUpperCase() : 'Text will goes here 😎'}
