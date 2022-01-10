@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Style1 from '../template/Style1';
 import { Button } from 'antd';
-import { COLORS } from '../../const';
+import { COLORS, BASE_NAME } from '../../const';
 import Header from '../Home/Header';
 import { enquireScreen } from 'enquire-js';
 import {
@@ -139,7 +139,7 @@ const View = () => {
           <Button
             type='primary'
             className='btn mt-3'
-            onClick={() => (window.location.href = '/#/tool')}
+            onClick={() => (window.location.href = `${BASE_NAME}/#/tool`)}
           >
             Go Back
             <FontAwesomeIcon id='icon' icon={faChevronCircleLeft} />

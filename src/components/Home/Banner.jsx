@@ -6,6 +6,7 @@ import QueueAnim from 'rc-queue-anim';
 import TweenOne from 'rc-tween-one';
 import { Button } from 'antd';
 import BannerSVGAnim from './component/BannerSVGAnim';
+import { BASE_NAME } from '../../const';
 // import history from "../../services/history";
 
 function Banner(props) {
@@ -29,7 +30,7 @@ function Banner(props) {
         <div key='button' className='button-wrapper'>
           <Button
             type='primary'
-            onClick={() => (window.location.href = '/#/tool')}
+            onClick={() => (window.location.href = `/${BASE_NAME}/#/tool`)}
           >
             Get Started
           </Button>

@@ -14,3 +14,4 @@ export const UET =
 export const PROXY = 'https://cors-anywhere.herokuapp.com/';
 export const COLORS = [Blue, Green, Red, Pink, Yellow];
 export const NEWS = 'https://uetgetnews.herokuapp.com/sguet';
+export const BASE_NAME = 'sguet-news';

@@ -1,31 +1,31 @@
-import React from "react";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./components/Home/";
-import Tool from "./components/Tool/";
+import React from 'react';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './components/Home/';
+import Tool from './components/Tool/';
 // import View from "./components/view/View";
-import history from "./services/history";
-import { NotFound } from "./components/NotFound/NotFound";
-import View from "./components/view/View";
+import history from './services/history';
+import { NotFound } from './components/NotFound/NotFound';
+import View from './components/view/View';
 
 const routes = [
   {
-    path: "/",
+    path: '/',
     component: Home,
     exact: true,
   },
   {
-    path: "/view",
+    path: '/view',
     component: View,
     exact: true,
   },
   {
-    path: "/tool",
+    path: '/tool',
     component: Tool,
     exact: true,
   },
 
   {
-    path: "*",
+    path: '*',
     component: NotFound,
   },
 ];
@@ -33,7 +33,7 @@ const routes = [
 export class AppRouter extends React.Component {
   render() {
     return (
-      <Router history={history}>
+      <Router history={history} basename='/sguet-news'>
         <Switch>
           {routes.map((route, i) => (
             <RouteWithSubRoutes key={i} {...route} />

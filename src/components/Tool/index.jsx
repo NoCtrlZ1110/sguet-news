@@ -13,6 +13,7 @@ import { css } from '@emotion/core';
 import { API } from '../../const';
 import { Card, Input, Layout } from 'antd';
 import './style.less';
+import { BASE_NAME } from '../../const';
 
 const { Sider, Content } = Layout;
 
@@ -108,7 +109,7 @@ export const Tool = () => {
           setTimeout(() => {
             setLoading(false);
             setVisible(false);
-            window.location.href = '/#/view/';
+            window.location.href = `/${BASE_NAME}/#/view/`;
           }, 1000);
         }}
         style={{ width: 'fit-content' }}
