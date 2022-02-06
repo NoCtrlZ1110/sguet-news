@@ -6,7 +6,7 @@
 <a href="https://sguet.noctrlz.me/">![Demo]('./../src/assets/images/example.png)</a>
 
 #
-### Deployed here: 🔗  https://sguet.noctrlz.tech/ 
+### Deployed here: 🔗  https://noctrlz1110.github.io/sguet-news/
 #
 
 <br/>
